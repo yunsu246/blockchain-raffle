@@ -1,0 +1,35 @@
+{
+  "name": "blockchain",
+  "version": "1.0.0",
+  "description": "Smart Raffle ",
+  "main": "",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "lite-server": "^2.3.0",
+    "bignumber.js": "git+https://github.com/frozeman/bignumber.js-nolookahead.git#57692b3ecfc98bbdd6b3a516cb2353652ea49934",
+    "crypto-js": "^3.1.8",
+    "utf8": "^2.1.2",
+    "web3": "^0.20.4",
+    "xhr2": "^0.1.4",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "devDependencies": {
+    "solium": "^1.0.0"
+  },
+  "scripts": {
+    "lint": "solium --dir contracts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Altoros/smart-raffle.git"
+  },
+  "author": "Franco Victorio & Manuel Garcia",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Altoros/smart-raffle/issues"
+  },
+  "homepage": "https://github.com/Altoros/smart-raffle#readme"
+}
