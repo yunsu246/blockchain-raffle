@@ -23,12 +23,12 @@ $ cd smart-raffle
 
 ## Part 2: Smart Contract 생성 / 컴파일 및 배포 / 테스트
 ### 2.1. Smart Contract 작성하기
+
+Migrations.sol 코드를 아래와 같이 수정하세요.
 ```
 $ cd blockchain
 $ vi contracts/Migrations.sol
 ```
-
-코드를 아래와 같이 수정하세요.
 ```solidity
 pragma solidity ^0.4.24;
 
@@ -55,11 +55,10 @@ contract Migrations {
 }
 ```
 
+Raffle.sol 코드를 아래와 같이 수정하세요.
 ```
 $ vi contracts/Raffle.sol
 ```
-
-코드를 아래와 같이 수정하세요.
 ```solidity
 pragma solidity ^0.4.24;
 
@@ -168,25 +167,47 @@ Writing artifacts to ./build/contracts
 ```
 
 ### 2.3. Kaleido 연결하기 (개발환경)
+Smart Contract를 블록체인에 마이그레이션(배포)하기 전에 먼저 truffle.js, package.json을 수정하여 Kaleido와 연결()합니다
 
-Smart Contract를 블록체인에 마이그레이션(배포)하기 전에 먼저 truffle.js, package.json을 수정하여 Kaleido와 연결합니다
-
+truffle.js 코드를 아래와 같이 수정하세요.
 ```
 $ cd ..
 $ vi truffle.js
 ```
-
-코드를 아래와 같이 수정하세요.
 ```solidity
 var Web3 = require('web3');
 
 module.exports = {
 networks: {
-    raffle: {
+    node_1: {
       provider: () => {
-        return new Web3.providers.HttpProvider('https://[NODE-RPC-URL]', 0, '[USERNAME]', '[PASSWORD]');
+        return new Web3.providers.HttpProvider('https://[NODE_1-RPC-URL]', 0, '[USERNAME]', '[PASSWORD]');
       },
-      network_id: "*",
+      network_id: "*", // Match any network id
+      gasPrice: 0,
+      gas: 4500000
+    },
+    node_2: {
+      provider: () =>
+        return new Web3.providers.HttpProvider('https://[NODE_2-RPC-URL]', 0, '[USERNAME]', '[PASSWORD]');
+      },
+      network_id: "*", // Match any network id
+      gasPrice: 0,
+      gas: 4500000
+    },
+    node_3: {
+      provider: () => {
+        return new Web3.providers.HttpProvider('https://[NODE_3-RPC-URL]', 0, '[USERNAME]', '[PASSWORD]');
+      },
+      network_id: "*", // Match any network id
+      gasPrice: 0,
+      gas: 4500000
+    },
+    node_4: {
+      provider: () => {
+        return new Web3.providers.HttpProvider('https://[NODE_4-RPC-URL]', 0, '[USERNAME]', '[PASSWORD]');
+      },
+      network_id: "*", // Match any network id
       gasPrice: 0,
       gas: 4500000
     }
@@ -194,11 +215,10 @@ networks: {
 };
 ```
 
+package.json의 dependencies를 아래와 같이 수정하세요.
 ```
 $ vi package.json
 ```
-
-dependencies를 아래와 같이 수정하세요.
 ```solidity
   "dependencies": {
     "dotenv": "^4.0.0",
@@ -217,11 +237,10 @@ dependencies를 아래와 같이 수정하세요.
 $ npm install
 ```
 
+truffle_migrate.sh 코드를 아래와 같이 수정하세요.
 ```
 $ vi truffle_migrate.sh
 ```
-
-코드를 아래와 같이 수정하세요.
 ```solidity
 #!/bin/bash
 truffle migrate --network raffle --reset > /dev/null &
@@ -230,6 +249,7 @@ set -x
 truffle migrate --network raffle --reset
 ```
 
+truffle_migrate.sh를 실행합니다.
 ```
 $ ./truffle_migrate.sh
 ```
@@ -256,4 +276,22 @@ Running migration: 1506615515_raffle.js
 Saving successful migration to network...
   ... 0x497a4365b9983c3d3b20abaa285027769d82ab59689394ead0fffb2a396370e8
 Saving artifacts...
+```
+
+## Part 3: vue.js를 사용해 FRONT-END 설치/배포
+```
+cd ../web
+```
+```
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
+
+# build for production and view the bundle analyzer report
+npm run build --report
 ```
