@@ -5,9 +5,9 @@
         <v-flex xs12>
           <v-form v-model="valid" ref="form">
             <v-text-field
-              label="Nombre"
+              label="Name"
               v-model="fullname"
-              :rules="[required('Nombre')]"
+              :rules="[required('Name')]"
               required>
             </v-text-field>
             <v-text-field
@@ -16,7 +16,7 @@
               :rules="[required('E-mail')]"
               required>
             </v-text-field>
-            <v-btn :disabled="!valid" type="submit" @click.prevent="buyTicket(fullname, email)">Comprar ticket</v-btn>
+            <v-btn :disabled="!valid" type="submit" @click.prevent="buyTicket(fullname, email)">Buy ticket</v-btn>
           </v-form>
 
           <br>
@@ -24,19 +24,19 @@
           <br>
 
           <TicketsList
-            title="Tickets vendidos"
-            emptyMessage="Todavía no se vendió ningún ticket"
+            title="Tickets sold"
+            emptyMessage="No tickets sold yet"
             :tickets="tickets"
           >
           </TicketsList>
 
           <br>
-            <v-btn v-if="isOwnerConnected" type="button" @click.prevent="drawTicket()">Sacar ticket</v-btn>
+            <v-btn v-if="isOwnerConnected" type="button" @click.prevent="drawTicket()">Draw ticket</v-btn>
           <br>
 
           <TicketsList
-            title="Tickets sacados"
-            emptyMessage="Todavía no se sacó ningún ticket"
+            title="Tickets drawn"
+            emptyMessage="No ticket drawn yet"
             :tickets="drawnTickets"
           >
           </TicketsList>
