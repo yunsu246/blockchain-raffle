@@ -1,12 +1,36 @@
 var Web3 = require('web3');
 
 module.exports = {
-networks: {
-    raffle: {
+  networks: {
+    node_1: {
       provider: () => {
-        return new Web3.providers.HttpProvider('https://k0fw2h1vn1-k0nopjik6e-rpc.ap-northeast-2.kaleido.io', 0, 'k0za9ikbqb', 'Bb8ZvVDqBMBvYqXQE2MRXcV3pRvLEuEpzLprOf_sgtc');
+        return new Web3.providers.HttpProvider('https://[KALEIDO_RPC_ENDPOINT]', 0, '[USERNAME]', '[PASSWORD]');
       },
-      network_id: "*",
+      network_id: "",
+      gasPrice: 0,
+      gas: 4500000
+    },
+    node_2: {
+      provider: () => {
+        return new Web3.providers.HttpProvider('https://[KALEIDO_RPC_ENDPOINT]', 0, '[USERNAME]', '[PASSWORD]');
+      },
+      network_id: "",
+      gasPrice: 0,
+      gas: 4500000
+    },
+    node_3: {
+      provider: () => {
+        return new Web3.providers.HttpProvider('https://[KALEIDO_RPC_ENDPOINT]', 0, '[USERNAME]', '[PASSWORD]');
+      },
+      network_id: "",
+      gasPrice: 0,
+      gas: 4500000
+    },
+    node_4: {
+      provider: () => {
+        return new Web3.providers.HttpProvider('https://[KALEIDO_RPC_ENDPOINT]', 0, '[USERNAME]', '[PASSWORD]');
+      },
+      network_id: "",
       gasPrice: 0,
       gas: 4500000
     }

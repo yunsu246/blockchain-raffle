@@ -1,5 +1,5 @@
 #!/bin/bash
-truffle migrate --network raffle --reset > /dev/null &
+truffle migrate --network node_1 --reset > /dev/null &
 sleep 1
 set -x
-truffle migrate --network raffle --reset
+truffle migrate --network node_1 --reset
