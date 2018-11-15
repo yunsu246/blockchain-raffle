@@ -18,7 +18,7 @@ contract Raffle {
   event TicketDrawn();
 
   constructor(string _name) public {
-    owner = msg.sender;
+    owner = msg.sender; //or specific owner account from metamask
     ownerName = _name;
   }
 
@@ -58,35 +58,25 @@ contract Raffle {
 
     uint idx = randomTicketIndex();
     drawnTickets.push(tickets[idx]);
-    removeTicket(idx);
+    removeTicket();
 
     emit TicketDrawn();
   }
 
-  function removeTicket(uint idx) public {
-    for (uint i = idx; i + 1 < tickets.length; i++) {
-      tickets[i] = tickets[i+1];
+  function removeTicket() public {
+    for (uint i = 0; i < tickets.length; i++) {
+        delete tickets[tickets.length - (i+1)];
     }
-
-    delete tickets[tickets.length - 1];
-    tickets.length--;
+    tickets.length = 0;
   }
 
-  function randomTicketIndex() public constant returns (uint) {
+  function randomTicketIndex() constant public returns (uint) {
     uint idx = random() % tickets.length;
     return idx;
   }
 
-  // Generate a random number using the Linear Congruential Generator algorithm,
-  // using the block number as the seed of randomness.
-  // The magic numbers `a`, `c` and `m` where taken from the Wikipedia article.
-  function random() public constant returns (uint) {
-    uint seed = block.number;
-
-    uint a = 1103515245;
-    uint c = 12345;
-    uint m = 2 ** 32;
-
-    return (a * seed + c) % m;
+  function random() constant public returns (uint) {
+    uint seed = uint(keccak256(abi.encodePacked(block.timestamp, block.difficulty, block.number)));
+    return seed;
   }
 }
